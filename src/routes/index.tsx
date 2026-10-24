@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Box, Compass, Gauge, Layers, Wind, Zap, Activity } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, ComposedChart } from "recharts";
+import { Area, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, ComposedChart } from "recharts";
 import { Button } from "@/components/ui/button";
 import { FanViewport } from "@/components/three/FanViewport";
 import { SystemCard } from "@/components/systems/SystemCard";
@@ -31,6 +31,7 @@ export const Route = createFileRoute("/")({
 });
 
 const op = computeFan(DEFAULT_FAN_INPUTS);
+const TONE_TEXT = { cyan: "text-cyan", gold: "text-gold", violet: "text-violet", success: "text-success" } as const;
 const curve = curveSeries(DEFAULT_FAN_INPUTS, 30);
 
 const RECENT = [
@@ -125,7 +126,7 @@ function Dashboard() {
         ].map((k) => (
           <div key={k.label} className="panel group flex items-center gap-3 p-4 transition-colors hover:border-hairline">
             <span className="grid size-10 place-items-center rounded-xl bg-surface-2 transition-transform duration-300 group-hover:scale-105">
-              <k.icon className={cn("size-5", `text-${k.tone}`)} />
+              <k.icon className={cn("size-5", TONE_TEXT[k.tone])} />
             </span>
             <Stat label={k.label} value={k.value} unit={k.unit} tone={k.tone} />
           </div>
@@ -257,5 +258,3 @@ function Dashboard() {
   );
 }
 
-// keep AreaChart tree-shaken import referenced for future sparkline usage
-void AreaChart;
