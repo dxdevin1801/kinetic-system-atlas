@@ -35,7 +35,7 @@ export interface SimSample {
 
 export const SIM_DEFAULTS: SimParams = {
   throttle: 0.75,
-  inertia: 0.0009,
+  inertia: 0.006,
   bearingFriction: 0.00004,
   ductResistance: 1,
   ambient: 25,
